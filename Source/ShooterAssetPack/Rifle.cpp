@@ -42,7 +42,6 @@ void ARifle::PullTrigger()
 		if (HitActor != nullptr)
 		{
 			HitActor->TakeDamage(Damage, DamageEvent, OwnerController, this);
-			UGameplayStatics::ApplyDamage(HitActor, Damage, OwnerController, this, nullptr);
 		}
 	}
 }
