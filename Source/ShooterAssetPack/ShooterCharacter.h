@@ -64,10 +64,10 @@ private:
 	ARifle* Gun;
 
 	UPROPERTY(EditAnywhere, Category = "Movement")
-	float WalkSpeed = 150.0f;
+	float WalkSpeed = 250.0f;
 
 	UPROPERTY(EditAnywhere, Category = "Movement")
-	float SprintSpeed = 350.0f;
+	float SprintSpeed = 500.0f;
 
 	UPROPERTY(EditAnywhere, Category = "Movement")
 	float TurnSpeed = 10.0f;

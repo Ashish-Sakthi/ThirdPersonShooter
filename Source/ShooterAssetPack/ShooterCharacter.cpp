@@ -27,7 +27,7 @@ void AShooterCharacter::BeginPlay()
 	Super::BeginPlay();
 	SetupEnhancedIMC();
 	AttachGun();
-	GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
+	GetCharacterMovement()->MaxWalkSpeed = SprintSpeed;
 	Health = MaxHealth;
 }
 
@@ -71,12 +71,12 @@ void AShooterCharacter::Fire()
 
 void AShooterCharacter::StartSprint()
 {
-	GetCharacterMovement()->MaxWalkSpeed = SprintSpeed;
+	GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
 }
 
 void AShooterCharacter::StopSprint()
 {
-	GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
+	GetCharacterMovement()->MaxWalkSpeed = SprintSpeed;
 }
 
 float AShooterCharacter::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
