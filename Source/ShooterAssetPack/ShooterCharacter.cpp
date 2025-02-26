@@ -61,7 +61,7 @@ void AShooterCharacter::Turn(const FInputActionValue& Value)
 	}
 }
 
-void AShooterCharacter::Fire()
+void AShooterCharacter::Shoot()
 {
 	if (Gun)
 	{
@@ -117,7 +117,7 @@ void AShooterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 		EnhancedPlayerInput->BindAction(TurnAction,ETriggerEvent::Triggered,this,&AShooterCharacter::Turn);
 		EnhancedPlayerInput->BindAction(MovementAction, ETriggerEvent::Triggered, this, &AShooterCharacter::Move);
 		EnhancedPlayerInput->BindAction(JumpAction, ETriggerEvent::Triggered, this, &ACharacter::Jump);
-		EnhancedPlayerInput->BindAction(FireAction, ETriggerEvent::Started, this, &AShooterCharacter::Fire);
+		EnhancedPlayerInput->BindAction(FireAction, ETriggerEvent::Started, this, &AShooterCharacter::Shoot);
 		EnhancedPlayerInput->BindAction(SprintAction, ETriggerEvent::Started, this, &AShooterCharacter::StartSprint);
 		EnhancedPlayerInput->BindAction(SprintAction, ETriggerEvent::Completed, this, &AShooterCharacter::StopSprint);
 	}

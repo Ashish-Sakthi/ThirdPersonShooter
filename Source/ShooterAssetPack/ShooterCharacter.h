@@ -23,6 +23,8 @@ public:
 	UFUNCTION(BlueprintPure)
 	bool IsDead() const;
 
+	void Shoot();
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -52,7 +54,6 @@ protected:
 
 	void Move(const FInputActionValue& Value);
 	void Turn(const FInputActionValue& Value);
-	void Fire();
 	void StartSprint();
 	void StopSprint();
 
@@ -67,7 +68,7 @@ private:
 	float WalkSpeed = 250.0f;
 
 	UPROPERTY(EditAnywhere, Category = "Movement")
-	float SprintSpeed = 500.0f;
+	float SprintSpeed = 600.0f;
 
 	UPROPERTY(EditAnywhere, Category = "Movement")
 	float TurnSpeed = 10.0f;
