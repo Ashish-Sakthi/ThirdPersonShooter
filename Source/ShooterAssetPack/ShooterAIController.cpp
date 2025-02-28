@@ -3,6 +3,7 @@
 #include "ShooterAIController.h"
 #include "BehaviorTree/BlackBoardComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "ShooterCharacter.h"
 
 void AShooterAIController::BeginPlay()
 {
@@ -19,4 +20,16 @@ void AShooterAIController::BeginPlay()
 void AShooterAIController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+}
+
+bool AShooterAIController::isDead() const
+{
+	AShooterCharacter* ControlledCharacter = Cast<AShooterCharacter>(GetPawn());
+	if (ControlledCharacter != nullptr)
+	{
+		return ControlledCharacter->IsDead();
+	}
+	FString PawnName = GetPawn()->GetName();
+	UE_LOG(LogTemp,Warning,TEXT("Name : %s"),*PawnName);
+	return true;
 }

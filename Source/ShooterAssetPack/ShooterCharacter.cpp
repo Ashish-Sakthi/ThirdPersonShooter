@@ -6,6 +6,8 @@
 #include "Rifle.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
+#include "Components/CapsuleComponent.h"
+#include "ShooterGameModeBase.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 // Sets default values
@@ -46,7 +48,8 @@ void AShooterCharacter::Move(const FInputActionValue& Value)
 	if (GetController())
 	{
 		const FRotator Rotation = GetControlRotation();
-		const FVector Direction = FRotationMatrix(Rotation).GetUnitAxis(EAxis::Y) * MoveAxisValue.X + FRotationMatrix(Rotation).GetUnitAxis(EAxis::X) * MoveAxisValue.Y;
+		const FRotator YawRotation(0, Rotation.Yaw, 0); // Only use the yaw rotation to prevent movement issues when looking up or down
+		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y) * MoveAxisValue.X + FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X) * MoveAxisValue.Y;
 		AddMovementInput(Direction);
 	}
 }
@@ -85,6 +88,18 @@ float AShooterCharacter::TakeDamage(float DamageAmount, FDamageEvent const& Dama
 	DamageToApply = FMath::Min(DamageToApply, Health);
 	Health -= DamageToApply;
 	UE_LOG(LogTemp, Warning, TEXT("Health: %f"), Health);
+
+	if (IsDead())
+	{
+		AShooterGameModeBase* GameMode = GetWorld()->GetAuthGameMode<AShooterGameModeBase>();
+		if (GameMode)
+		{
+			GameMode->PawnKilled(this);
+		}
+		DetachFromControllerPendingDestroy();
+		GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision); 
+	}
+
 	return DamageToApply;
 }
 

@@ -37,8 +37,12 @@ private:
 	UParticleSystem* ImpactEffect;
 
 	UPROPERTY(EditAnywhere)
-	float MaxRange = 1000.0f;
+	float MaxRange = 2000.0f;
 
 	UPROPERTY(EditAnywhere)
 	float Damage = 10.0f;
+
+	bool GunTrace(FHitResult& Hit, FVector& ShotDirection);
+
+	AController* GetOwnerController() const;
 };
