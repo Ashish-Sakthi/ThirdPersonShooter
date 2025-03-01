@@ -42,6 +42,12 @@ private:
 	UPROPERTY(EditAnywhere)
 	float Damage = 10.0f;
 
+	UPROPERTY(EditAnywhere)
+	USoundBase* MuzzleSound;
+
+	UPROPERTY(EditAnywhere)
+	USoundBase* ImpactSound;
+
 	bool GunTrace(FHitResult& Hit, FVector& ShotDirection);
 
 	AController* GetOwnerController() const;

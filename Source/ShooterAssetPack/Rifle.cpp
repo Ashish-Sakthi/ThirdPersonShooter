@@ -20,6 +20,7 @@ ARifle::ARifle()
 void ARifle::PullTrigger()
 {
 	UGameplayStatics::SpawnEmitterAttached(MuzzleFlash, Mesh, TEXT("Muzzle"));
+	UGameplayStatics::SpawnSoundAttached(MuzzleSound, Mesh, TEXT("Muzzle"));
 
 	FHitResult OutHit;
 	FVector ShotDirection;
@@ -28,6 +29,7 @@ void ARifle::PullTrigger()
 	{
 		
 		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactEffect, OutHit.ImpactPoint, ShotDirection.Rotation());
+		UGameplayStatics::PlaySoundAtLocation(GetWorld(),ImpactSound,OutHit.ImpactPoint);
 		FPointDamageEvent DamageEvent(Damage, OutHit, ShotDirection, nullptr);
 		AActor* HitActor = OutHit.GetActor();
 		if (HitActor != nullptr)

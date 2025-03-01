@@ -23,6 +23,11 @@ bool AShooterCharacter::IsDead() const
 	return Health<=0;
 }
 
+float AShooterCharacter::GetHealthPercentage() const
+{
+	return Health/MaxHealth;
+}
+
 // Called when the game starts or when spawned
 void AShooterCharacter::BeginPlay()
 {
